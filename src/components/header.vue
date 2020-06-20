@@ -17,7 +17,6 @@
       </div>
       <div class="userinfo"  v-show="isLogin">
         <img :src="current.icon" alt srcset width="40" height="40" />
-        <router-link to="/test">{{current.username}}</router-link>
       </div>
       <div class="head_right">
         <div class="user">
@@ -26,10 +25,12 @@
             <div class="user_sort">
               <router-link to="/login" class="user_con user_con_list" v-show="!isLogin">登录</router-link>
               <span class="user_span" v-show="!isLogin">/</span>
-              <router-link to="/regist" class="user_con user_con_list">注册</router-link>
+              <span class="user_name" v-show="isLogin">{{current.username}}</span>
+              <router-link to="/regist" class="user_con user_con_list" v-show="!isLogin">注册</router-link>
               <router-link to="/" class="user_con user_list">我的订单</router-link>
               <router-link to="/" class="user_con user_list">我的收藏</router-link>
-              <router-link to="/login" class="user_con user_list">退出登录</router-link>
+              <span class="user_name" v-show="isLogin" @click="getExit()">退出登录</span>
+              <!-- <router-link class="user_con user_list" @click="getExit()">退出登录</router-link> -->
             </div>
           </div>
         </div>
@@ -72,6 +73,15 @@ export default {
   methods:{
     getLogin(){
       this.$router.push('/')
+    },
+    getExit(){
+      this.$axios.post('/api/admin/logout').then(res=>{
+        console.log(res);
+        if(res.data.code == 200){
+          localStorage.removeItem('Authorization');
+          this.$router.push('/login')
+        }
+      })
     }
   }
 };
@@ -225,6 +235,11 @@ export default {
           .user_span{
             display: inline-block;
             color: #999;
+          }
+          .user_name{
+            color: #d93732;
+            display: block;
+            padding: 5px;
           }
           .user_list{
             display: block;

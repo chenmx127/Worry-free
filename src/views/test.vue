@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import top from './header'
+import top from '../components/header'
 export default {
   components:{
     top

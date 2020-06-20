@@ -75,7 +75,6 @@ export default {
           this.$axios.post("/api/admin/login", this.loginform).then(res => {
             console.log(res);
             if(res.data.code == 200){
-              alert("登录成功！");
               this.userToken = 'Bearer ' + res.data.data.token;
               this.$store.commit('changeLogin',this.userToken);
               this.$axios.get('/api/admin/info').then(res=>{
@@ -84,7 +83,7 @@ export default {
                 if(users){
                     this.$store.dispatch("setUser",users);
                     this.$message.success("登录成功");
-                    this.$router.push("/test")
+                    this.$router.push("../views/test")
                   }else{
                     this.$store.dispatch("setUser",null);
                     this.$message.error("当前用户不存在");

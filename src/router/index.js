@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import test from '@/components/test'
+import test from '@/views/test'
 import login from '@/components/login'
 import regist from '@/components/regist'
-import store from '@/store'
 
 Vue.use(Router)
 
@@ -12,10 +11,10 @@ let router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/test'
+      redirect: '/views/test'
     },
     {
-      path: '/test',
+      path: '/views/test',
       name: 'test',
       component: test
     },
