@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import test from '@/views/test'
 import login from '@/components/login'
 import regist from '@/components/regist'
-
+import footer from '@/components/footer'
 Vue.use(Router)
 
 let router = new Router({
@@ -17,6 +17,11 @@ let router = new Router({
       path: '/views/test',
       name: 'test',
       component: test
+    },
+    {
+      path: '/footer',
+      name: 'footer',
+      component: footer
     },
     {
       path: '/login',
