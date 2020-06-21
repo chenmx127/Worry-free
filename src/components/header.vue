@@ -1,13 +1,33 @@
 <template>
   <div class="w">
     <div class="header">
-      <div class="head_logo" @click="getLogin()">
-      </div>
+      <div class="head_logo" @click="getLogin()"></div>
       <div class="head_sort">
-        <span class="sort_bar">物品分类<i class="sort_icon"></i></span>
+        <span class="sort_bar">
+          物品分类
+          <i class="sort_icon"></i>
+        </span>
         <ul class="sort_list">
           <li v-for="(item,index) in userlist" :key="index">{{item.title}}</li>
         </ul>
+      </div>
+      <div class="head_nav">
+        <span class="sort_bar">物品导航</span>
+        <div class="nav_list">
+          <div>
+            <div class="nav_top">
+              送给谁：
+              <router-link to="/" v-for="(item,index) in navlist" :key="index">{{item}}</router-link>
+            </div>
+            <div class="line">
+              <input type="button" class="nav_btn" value="搜索"/>
+            </div>
+            <div class="nav_top">
+              为啥送：
+              <router-link to="/" v-for="(item,index) in navlists" :key="index">{{item}}</router-link>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="head_con">
         <div class="head_top">
@@ -15,11 +35,11 @@
           <el-button type="primary" icon="el-icon-search"></el-button>
         </div>
       </div>
-      <div class="userinfo"  v-show="isLogin">
+      <div class="userinfo" v-show="isLogin">
         <img :src="current.icon" alt srcset width="40" height="40" />
       </div>
       <div class="head_right">
-        <div class="user">
+        <div class="user" @click="getPeople()">
           <i class="user_icon"></i>
           <div class="user_hid">
             <div class="user_sort">
@@ -30,7 +50,6 @@
               <router-link to="/" class="user_con user_list">我的订单</router-link>
               <router-link to="/" class="user_con user_list">我的收藏</router-link>
               <span class="user_name" v-show="isLogin" @click="getExit()">退出登录</span>
-              <!-- <router-link class="user_con user_list" @click="getExit()">退出登录</router-link> -->
             </div>
           </div>
         </div>
@@ -52,6 +71,26 @@ export default {
   data() {
     return {
       input: "",
+      navlist: [
+        "不限",
+        "公主女票",
+        "欧巴男票",
+        "潮爸辣妈",
+        "兄弟闺蜜",
+        "熊孩子",
+        "生意伙伴",
+        "致谢恩师"
+      ],
+      navlists: [
+        "不限",
+        "表白撩妹",
+        "过生日",
+        "圣诞节",
+        "情人节",
+        "去求婚",
+        "纪念日",
+        "想送任性"
+      ],
       usericon: localStorage.getItem("userAvatar")
     };
   },
@@ -70,25 +109,23 @@ export default {
       requried: true
     }
   },
-  methods:{
-    getLogin(){
-      this.$router.push('/')
+  methods: {
+    getLogin() {
+      this.$router.push("/");
     },
-    getExit(){
-      this.$axios.post('/api/admin/logout').then(res=>{
-        console.log(res);
-        if(res.data.code == 200){
-          localStorage.removeItem('Authorization');
-          this.$router.push('/login')
-        }
-      })
+    getExit() {
+      this.$store.state.isLogin = false;
+      localStorage.removeItem("Authorization");
+      this.$router.push("/login");
+    },
+    getPeople(){
+      this.$router.push('../views/people');
     }
   }
 };
 </script>
 <style lang="scss">
 .w {
-  box-shadow: 0 2px 3px #ccc;
   background: #fff;
 }
 .header {
@@ -98,47 +135,47 @@ export default {
   justify-content: space-around;
   align-items: center;
   margin: 0 auto;
-  .head_logo{
+  .head_logo {
     width: 57px;
     height: 57px;
     overflow: hidden;
     border-radius: 57px;
     background-color: #d93732;
-    background-image: url('../assets/logo.png');
+    background-image: url("../assets/logo.png");
     background-repeat: no-repeat;
-    transition-duration: .3s;
+    transition-duration: 0.3s;
     cursor: pointer;
-    &:hover{
+    &:hover {
       background-position: -57px 0;
     }
   }
-  .head_sort{
+  .head_sort {
     margin-left: -150px;
     padding: 35px 24px 34px 25px;
     cursor: pointer;
     position: relative;
-    &:hover{
-      background: rgba(255, 249, 165, .1);
-    } 
-    &:hover .sort_list{
+    &:hover {
+      background: rgba(255, 249, 165, 0.1);
+    }
+    &:hover .sort_list {
       display: block;
       box-shadow: 3px 0px 5px #ececec;
     }
-    .sort_bar{
-    &:hover{
-      color: #d93732;
-    }
-      .sort_icon{
+    .sort_bar {
+      &:hover {
+        color: #d93732;
+      }
+      .sort_icon {
         display: inline-block;
         width: 14px;
         height: 12px;
         margin-left: 5px;
-        background-image: url('../assets/logo.png');
+        background-image: url("../assets/logo.png");
         background-repeat: no-repeat;
         background-position: -205px 0;
       }
     }
-    .sort_list{
+    .sort_list {
       width: 132px;
       background: #fff9a5;
       position: absolute;
@@ -146,12 +183,68 @@ export default {
       left: 0px;
       z-index: 95;
       display: none;
-      li{
+      li {
         width: 32px;
         list-style: none;
         padding: 10px 50px;
-        border-bottom:1px solid #fff;
-        &:hover{
+        border-bottom: 1px solid #fff;
+        &:hover {
+          color: #d93732;
+        }
+      }
+    }
+  }
+  .head_nav {
+    cursor: pointer;
+    padding: 35px 0px;
+    margin-left: -150px;
+    &:hover .sort_bar {
+      color: #d93732;
+    }
+    &:hover .nav_list {
+      display: block;
+    }
+    .nav_list {
+      padding: 50px 0px 80px 200px;
+      position: absolute;
+      box-sizing: border-box;
+      top: 90px;
+      left: 0px;
+      width: 100%;
+      background: #fff;
+      display: none;
+      font-size: 12px;
+      z-index: 95;
+      color: #333;
+      box-shadow: 2px 0px 5px #ccc;
+      .line {
+        width: 55%;
+        height: 1px;
+        background: #f5f5f5;
+        margin-top: 20px;
+        margin-bottom: 18px;
+        position: relative;
+        .nav_btn {
+          position: absolute;
+          top: 60px;
+          right: -100px;
+          padding: 13px 30px;
+          color: #fff;
+          background: #d93732;
+          border-radius: 5px;
+          border:none;
+          outline: none;
+          cursor: pointer;
+          &:hover {
+            background: #eb3232;
+          }
+        }
+      }
+      .router-link-active {
+        color: #333;
+        text-decoration: none;
+        margin-right: 15px;
+        &:hover {
           color: #d93732;
         }
       }
@@ -179,16 +272,15 @@ export default {
         height: 35px;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;
-        .el-icon-search{
+        .el-icon-search {
           display: block;
           margin-top: -2px;
         }
       }
-      
     }
   }
   .head_right {
-    .user{
+    .user {
       display: inline-block;
       border: 2px solid #e9e9e9;
       width: 28px;
@@ -197,26 +289,26 @@ export default {
       text-align: center;
       position: relative;
       cursor: pointer;
-      &:hover{
+      &:hover {
         border-color: #d93732;
       }
-      &:hover .user_icon{
+      &:hover .user_icon {
         background-position: -149px -14px;
       }
-      &:hover .user_hid{
+      &:hover .user_hid {
         display: block;
       }
-      .user_icon{
+      .user_icon {
         width: 14px;
         height: 14px;
-        background-image: url('../assets/logo.png');
+        background-image: url("../assets/logo.png");
         background-repeat: no-repeat;
         background-position: -149px 0;
         display: inline-block;
         margin-top: 7px;
-        transition-duration: .5s;
+        transition-duration: 0.5s;
       }
-      .user_hid{
+      .user_hid {
         padding-top: 10px;
         position: absolute;
         top: 30px;
@@ -224,38 +316,38 @@ export default {
         display: none;
         background: #fff;
         z-index: 99;
-        .user_sort{
-          width:120px;
+        .user_sort {
+          width: 120px;
           border-radius: 5px;
           border: 1px solid #e9e9e9;
           overflow: hidden;
-          .user_con_list{
+          .user_con_list {
             display: inline-block;
           }
-          .user_span{
+          .user_span {
             display: inline-block;
             color: #999;
           }
-          .user_name{
+          .user_name {
             color: #d93732;
             display: block;
             padding: 5px;
           }
-          .user_list{
+          .user_list {
             display: block;
           }
-          .user_con{
+          .user_con {
             padding: 5px;
             text-decoration: none;
             color: #999;
-            &:hover{
-              color:#d93732;
+            &:hover {
+              color: #d93732;
             }
           }
         }
       }
     }
-    .shop{
+    .shop {
       display: inline-block;
       border: 2px solid #e9e9e9;
       width: 28px;
@@ -265,39 +357,39 @@ export default {
       margin-left: 20px;
       position: relative;
       cursor: pointer;
-      &:hover{
+      &:hover {
         border-color: #d93732;
       }
-      &:hover .shop_icon{
+      &:hover .shop_icon {
         background-position: -164px -14px;
       }
-      &:hover .shop_hid{
+      &:hover .shop_hid {
         display: block;
       }
-      .shop_icon{
+      .shop_icon {
         width: 17px;
         height: 14px;
-        background-image: url('../assets/logo.png');
+        background-image: url("../assets/logo.png");
         background-repeat: no-repeat;
         background-position: -164px 0;
         display: inline-block;
         margin-top: 7px;
-        transition-duration: .5s;
+        transition-duration: 0.5s;
       }
-      .shop_hid{
-          padding-top: 10px;
-          position: absolute;
-          top: 30px;
-          right: -20px;
-          display: none;
-          background: #fff;
-          z-index: 97;
-          .shop_sort{
-          width:300px;
+      .shop_hid {
+        padding-top: 10px;
+        position: absolute;
+        top: 30px;
+        right: -20px;
+        display: none;
+        background: #fff;
+        z-index: 97;
+        .shop_sort {
+          width: 300px;
           height: 100px;
           border-radius: 5px;
           border: 1px solid #e9e9e9;
-          .shop_con{
+          .shop_con {
             display: block;
             margin-top: 38px;
             font-size: 14px;
@@ -307,7 +399,7 @@ export default {
       }
     }
   }
-  .userinfo{
+  .userinfo {
     margin-right: -150px;
     width: 60px;
     height: 40px;

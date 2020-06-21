@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import test from '@/views/test'
+import people from '@/views/people'
 import login from '@/components/login'
 import regist from '@/components/regist'
 
@@ -17,6 +18,11 @@ let router = new Router({
       path: '/views/test',
       name: 'test',
       component: test
+    },
+    {
+      path: '/views/people',
+      name: 'people',
+      component: people
     },
     {
       path: '/login',
