@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import test from '@/views/test'
 import login from '@/components/login'
 import regist from '@/components/regist'
+import middle from '@/components/middle'
 
 Vue.use(Router)
 
@@ -27,7 +28,12 @@ let router = new Router({
       path: '/regist',
       name: 'regist',
       component: regist
-    }
+    },
+    {
+      path: '/middle',
+      name: 'middle',
+      component: middle
+    },
   ],
 })
 router.beforeEach((to, from, next) => {
