@@ -2,7 +2,7 @@
   <div>
     <!-- class=" " -->
     <div class="footer">
-      <div class="top">
+      <div class="top wrap">
         <div class="left-1"></div>
         <span class="fenge"></span>
         <div class="left-2">
@@ -62,32 +62,14 @@
                  </ul>
               </div>
           </div>
-          <div class="but-foot">
-            <span>友情链接：</span>
-            <span>照片书</span>
-            <span>厦门特产</span>
-            <span>网上冲印</span>
-            <span>劳保用品网</span>
-            <span>紫砂壶</span>
-            <span>批发网</span>
-            <span>眼镜</span>
-            <span>中国鲜花礼品网</span>
-            <span>影楼网</span>
-            <span>人民币收藏</span>
-            <span>欧宝丽官网</span>
-            <span>服装搭配</span>
-            <span>纸艺网</span>
-            <span>商机网</span>
-            <span>鲜花网</span>
-            <span>意绵绵珠宝</span> 
-          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+};
 </script>
 <style lang="scss">
 *{
@@ -97,21 +79,24 @@ export default {};
 }
 .footer {
   .top {
-    width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-around;
     padding: 50px 0px;
     align-items: center;
     .fenge {
-      border: 0.5px solid #ebe9e9;
+      width: 1px;
+      background: #ebe9e9;
       height: 85px;
     }
     .left-1 {
       width: 164px;
       height: 60px;
+      margin-left: 50px;
       background: url(../assets/logo.png) no-repeat;
       background-position: 1px -57px;
+    }
+    .left-2 {
+      margin: 0 -50px;
     }
     .right-1 {
       p{
@@ -122,21 +107,33 @@ export default {};
         display: flex;
         margin-top: 10px;
         li {
-          
-          width: 30px;
-          height: 30px;
           background: url(../assets/logo.png) no-repeat;
           margin-right: 15px;
+          cursor: pointer;
         }
         li:nth-child(1) {
-          background-position: 2px -275px;
+          width: 28px;
+          height: 24px;
+          background-position: 0px -276px;
+          &:hover{
+            background-position: 0px -251px;
+          }
         }
         li:nth-child(2) {
-          background-position: -28px -275px;
-          width: 26px;
+          width: 24px;
+          height: 24px;
+          background-position: -29px -276px;
+          &:hover{
+            background-position: -29px -251px;
+          }
         }
         li:nth-child(3) {
-          background-position: -54px -275px;
+          width: 30px;
+          height: 24px;
+          background-position: -54px -276px;
+          &:hover{
+            background-position: -54px -251px;
+          }
         }
       }
     }
@@ -150,25 +147,36 @@ export default {};
         font-size: 12px;
       }
       div {
-        border: 1px solid #999999;
+        border: 2px solid #ccc;
         border-radius: 50px;
         font-size: 14px;
         padding: 5px 0px;
         margin: 10px auto 0px;
         width: 143px;
+        transition: all .5s linear;
+        cursor: pointer;
+        span{
+          transition: all .5s linear;
+        }
+        &:hover{
+          border: 2px solid #d93732;
+        }
+        &:hover span{
+          color: #d93732;
+        }
       }
     }
   }
   .buttom-warp {
-      background-color: black;
+      background-color: #484442;
     .buttom {
         width:1200px;
         margin:0 auto;
       .but-top {
           display: flex;
           justify-content: space-around;
-          padding: 30px 0px;
-          border-bottom: 1px solid #666666;
+          padding: 45px 0px;
+          border-bottom: 2px solid #666666;
         div {
              display: flex;
              align-items: center;
@@ -204,39 +212,32 @@ export default {};
       .but-middle{
           display:flex;
           justify-content: space-between;
-          padding: 30px 31px;
-          border-bottom: 1px solid #666666;
+          padding: 40px 30px;
           .middle-left{
               span{
                 font-size:12px;
-                color:#e7e7e7;
+                color:#c3c3c3;
                 padding-right:10px;
               }
           }
           .middle-right{
               ul{
+                
                   display: flex;
                   justify-content: space-between;
                   align-items: center;
                   li{
+                    cursor: pointer;
                       font-size:12px;
-                      color:#e7e7e7;
+                      color:#c3c3c3;
                       margin:0 10px;
                   }
                   .mr-fenge{
-                     border: 0.5px solid #ebe9e9;
-                     height:17px;
+                     width: 1px;
+                     background: #c3c3c3;
+                     height:10px;
                   }
               }
-          }
-      }
-      .but-foot{
-           width: 900px;
-           margin-left: 32px;
-           padding: 30px 0px;
-          span{
-            color:#e7e7e7;
-            font-size:12px;
           }
       }
     }

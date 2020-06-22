@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import test from '@/views/test'
 import people from '@/views/people'
+import sort from '@/views/sort'
 import login from '@/components/login'
 import regist from '@/components/regist'
-import footer from '@/components/footer'
-import middle from '@/components/middle'
+import questions from '@/views/questions'
+import collection from '@/views/collection'
+import integral from '@/views/integral'
 
 Vue.use(Router)
 
@@ -27,9 +29,24 @@ let router = new Router({
       component: people
     },
     {
-      path: '/footer',
-      name: 'footer',
-      component: footer
+      path: '/views/questions',
+      name: 'questions',
+      component: questions
+    },
+    {
+      path: '/views/collection',
+      name: 'collection',
+      component: collection
+    },
+    {
+      path: '/views/integral',
+      name: 'integral',
+      component: integral
+    },
+    {
+      path: '/views/sort',
+      name: 'sort',
+      component: sort
     },
     {
       path: '/login',
@@ -40,12 +57,7 @@ let router = new Router({
       path: '/regist',
       name: 'regist',
       component: regist
-    },
-    {
-      path: '/middle',
-      name: 'middle',
-      component: middle
-    },
+    }
   ],
 })
 router.beforeEach((to, from, next) => {

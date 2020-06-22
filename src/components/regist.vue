@@ -13,10 +13,6 @@
           label-width="100px"
           class="demo-ruleForm"
         >
-          <el-form-item label="昵称" prop="nickName">
-            <label slot="label">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
-            <el-input v-model="registerform.nickName" placeholder="请输入昵称"></el-input>
-          </el-form-item>
           <el-form-item label="用户名" prop="username">
             <label slot="label">用&nbsp;&nbsp;户&nbsp;&nbsp;名</label>
             <el-input v-model="registerform.username" placeholder="请输入用户名"></el-input>
@@ -25,16 +21,14 @@
             <label slot="label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
             <el-input v-model="registerform.password" placeholder="请输入密码"></el-input>
           </el-form-item>
-          <el-form-item label="头像" prop="icon">
-            <label slot="label">头&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像</label>
-            <el-input v-model="registerform.icon" placeholder="请输入头像的网址"></el-input>
+          <el-form-item label="手机号" prop="telephone">
+            <label slot="label">手&nbsp;&nbsp;机&nbsp;&nbsp;号</label>
+            <el-input v-model="registerform.telephone" placeholder="请输入手机号"></el-input>
           </el-form-item>
-          <el-form-item label="邮箱" prop="email">
-            <label slot="label">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</label>
-            <el-input v-model="registerform.email" placeholder="请输入邮箱"></el-input>
-          </el-form-item>
-          <el-form-item label="个人说明" prop="note">
-            <el-input type="textarea" v-model="registerform.note" placeholder="请输入个人介绍"></el-input>
+          <el-form-item label="验证码" prop="authCode">
+            <label slot="label">验&nbsp;&nbsp;证&nbsp;&nbsp;码</label>
+            <el-input v-model="registerform.authCode" placeholder="请输入验证码" class="yzm"></el-input>
+            <el-button type="button" @click="submitYzm()">获取验证码</el-button>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('registerform')">立即注册</el-button>
@@ -69,17 +63,19 @@ export default {
         {title:'女装'}
         ],
       registerform: {
-        nickName: "",
-        icon: "",
         username: "",
         password: "",
-        email: "",
-        note: ""
+        telephone:'',
+        authCode:''
       },
       rules: {
-        nickName: [
-          { required: true, message: "请输入昵称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5个字符", trigger: "blur" }
+        telephone: [
+          { required: true, message: "请输入手机号", trigger: "blur" },
+          { min: 6, max: 12, message: "长度在6到12个字符", trigger: "blur" }
+        ],
+        authCode: [
+          { required: true, message: "请输入验证码", trigger: "blur" },
+          { min: 3, max: 6, message: "长度在 3 到 6个字符", trigger: "blur" }
         ],
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
@@ -88,12 +84,7 @@ export default {
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15个字符", trigger: "blur" }
-        ],
-        email: [
-          { required: true, message: "请输入邮箱地址", trigger: "blur" },
-          { min: 3, max: 18, message: "长度在 3 到 18个字符", trigger: "blur" }
-        ],
-        desc: [{ required: true, message: "请填写个人说明", trigger: "blur" }]
+        ]
       }
     };
   },
@@ -101,20 +92,31 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$axios
-            .post("/api/admin/register", this.registerform)
-            .then(res => {
-              console.log(res);
-              if (res.data.code == 200) {
-                alert("恭喜你，注册成功！");
-                this.$router.push("/login");
-              }
-            });
+          let datalist= new FormData();
+          datalist.append('username',this.registerform.username);
+          datalist.append('password',this.registerform.password);
+          datalist.append('telephone',this.registerform.telephone);
+          datalist.append('authCode',this.registerform.authCode);
+          this.$axios.post('/apo/sso/register',datalist).then(res=>{
+            console.log(res);
+            alert('注册成功！');
+            this.$router.push('/login');
+          })
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+    submitYzm(){
+      this.$axios.get('/apo/sso/getAuthCode',{
+        params:{
+          telephone:this.registerform.telephone
+        }
+      }).then(res=>{
+        console.log(res);
+        alert("发送成功！获取到的验证码为：" +res.data.data)
+      })
     }
   }
 };
@@ -144,6 +146,10 @@ export default {
   }
   .demo-ruleForm {
     margin-top: 20px;
+    .yzm{
+      width: 60%;
+      margin-right: 30px;
+    }
     label {
       color: #fff;
     }

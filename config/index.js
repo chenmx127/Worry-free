@@ -17,6 +17,13 @@ module.exports = {
         pathRewrite: {
           '^/api': 'http://cps-hk.com:8080'
         }
+      },
+      '/apo': {
+        target: 'http://192.168.1.122:8085',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/apo': 'http://192.168.1.122:8085'
+        }
       }
     },
 

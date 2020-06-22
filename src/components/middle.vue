@@ -90,6 +90,7 @@ export default {
         padding: 0;
     }
     .bgc {
+      padding: 30px 0px 50px 0px;
       background-color: #f5f5f5;
       .pic {
         width: 90%;

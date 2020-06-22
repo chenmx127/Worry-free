@@ -72,12 +72,15 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$axios.post("/api/admin/login", this.loginform).then(res => {
+          let datelist= new FormData();
+          datelist.append('username',this.loginform.username);
+          datelist.append('password',this.loginform.password);
+          this.$axios.post('/apo/sso/login',datelist).then(res=>{
             console.log(res);
             if(res.data.code == 200){
               this.userToken = 'Bearer ' + res.data.data.token;
               this.$store.commit('changeLogin',this.userToken);
-              this.$axios.get('/api/admin/info').then(res=>{
+              this.$axios.get('/apo/sso/info').then(res=>{
                 console.log(res);
                 let users=res.data.data
                 if(users){
@@ -89,11 +92,13 @@ export default {
                     this.$message.error("当前用户不存在");
                   }
                 })
-              }
-              if(res.data.code == 404){
-                alert('用户名或密码错误！')
-              }
-          });
+              // alert('登录成功！');
+              // this.$router.push('/');
+            }
+            if(res.data.code == 404){
+              alert('用户名或密码错误！')
+            }
+          })
         } else {
           console.log("error submit!!");
           return false;

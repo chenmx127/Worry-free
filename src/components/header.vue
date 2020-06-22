@@ -8,7 +8,7 @@
           <i class="sort_icon"></i>
         </span>
         <ul class="sort_list">
-          <li v-for="(item,index) in userlist" :key="index">{{item.title}}</li>
+          <li v-for="(item,index) in userlist" :key="index" @click="jump()">{{item.title}}</li>
         </ul>
       </div>
       <div class="head_nav">
@@ -20,7 +20,7 @@
               <router-link to="/" v-for="(item,index) in navlist" :key="index">{{item}}</router-link>
             </div>
             <div class="line">
-              <input type="button" class="nav_btn" value="搜索"/>
+              <input type="button" class="nav_btn" value="搜索" @click="jump()"/>
             </div>
             <div class="nav_top">
               为啥送：
@@ -39,13 +39,13 @@
         <img :src="current.icon" alt srcset width="40" height="40" />
       </div>
       <div class="head_right">
-        <div class="user" @click="getPeople()">
+        <div class="user">
           <i class="user_icon"></i>
           <div class="user_hid">
             <div class="user_sort">
               <router-link to="/login" class="user_con user_con_list" v-show="!isLogin">登录</router-link>
               <span class="user_span" v-show="!isLogin">/</span>
-              <span class="user_name" v-show="isLogin">{{current.username}}</span>
+              <span class="user_name" v-show="isLogin" @click="getPeople()">{{current.username}}</span>
               <router-link to="/regist" class="user_con user_con_list" v-show="!isLogin">注册</router-link>
               <router-link to="/" class="user_con user_list">我的订单</router-link>
               <router-link to="/" class="user_con user_list">我的收藏</router-link>
@@ -120,6 +120,9 @@ export default {
     },
     getPeople(){
       this.$router.push('../views/people');
+    },
+    jump(){
+      this.$router.push('../views/sort')
     }
   }
 };
@@ -132,7 +135,7 @@ export default {
   width: 1200px;
   height: 90px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin: 0 auto;
   .head_logo {
@@ -150,7 +153,7 @@ export default {
     }
   }
   .head_sort {
-    margin-left: -150px;
+    margin-left: -220px;
     padding: 35px 24px 34px 25px;
     cursor: pointer;
     position: relative;
@@ -197,7 +200,7 @@ export default {
   .head_nav {
     cursor: pointer;
     padding: 35px 0px;
-    margin-left: -150px;
+    margin-left: -200px;
     &:hover .sort_bar {
       color: #d93732;
     }
@@ -314,13 +317,14 @@ export default {
         top: 30px;
         left: -46px;
         display: none;
-        background: #fff;
         z-index: 99;
         .user_sort {
           width: 120px;
           border-radius: 5px;
+          background: #fff;
           border: 1px solid #e9e9e9;
           overflow: hidden;
+
           .user_con_list {
             display: inline-block;
           }
