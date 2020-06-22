@@ -3,6 +3,11 @@ import Router from 'vue-router'
 import test from '@/views/test'
 import people from '@/views/people'
 import sort from '@/views/sort'
+import order from '@/views/order'
+import eva from '@/views/eva'
+import adress from '@/views/adress'
+import vouchers from '@/views/vouchers'
+import chpassword from '@/views/chpassword'
 import login from '@/components/login'
 import regist from '@/components/regist'
 import questions from '@/views/questions'
@@ -47,6 +52,36 @@ let router = new Router({
       path: '/views/sort',
       name: 'sort',
       component: sort
+    },
+    {
+      path: '/views/order',
+      name: 'order',
+      component: order
+    },
+    {
+      path: '/views/chpassword',
+      name: 'chpassword',
+      component: chpassword
+    },
+    {
+      path: '/views/eva',
+      name: 'eva',
+      component: eva
+    },
+    {
+      path: '/views/adress',
+      name: 'adress',
+      component: adress
+    },
+    {
+      path: '/views/vouchers',
+      name: 'vouchers',
+      component: vouchers
+    },
+    {
+      path: '/footer',
+      name: 'footer',
+      component: footer
     },
     {
       path: '/login',
