@@ -1,5 +1,6 @@
 <template>
   <div>
+    <top></top>
     <div class="center">
       <div class="deta-top">
         <div class="demo-image">
@@ -32,7 +33,7 @@
             <span class="xin"><i></i></span>
           </el-row>
           <div class="sort">
-            <a href=""><i></i>查看更多同类商品</a>
+            <a href="#"><i></i>查看更多同类商品</a>
           </div>
         </div>
       </div>
@@ -42,11 +43,18 @@
         </div>
       </div>
     </div>
+    <bottom></bottom>
   </div>
 </template>
 
 <script>
+import top from "../components/header"
+import bottom from "../components/footer"
   export default {
+    components:{
+      top,
+      bottom
+    },
     data() {
       return {
         urls: [
