@@ -88,7 +88,6 @@ let router = new Router({
       component: vouchers
     },
     {
-<<<<<<< HEAD
       path: '/views/shopcart',
       name: 'shopcart',
       component: shopcart
@@ -99,8 +98,6 @@ let router = new Router({
       component: shopcart2
     },
     {
-=======
->>>>>>> 53a612439eb413ff638012a9962d1a55120af667
       path: '/login',
       name: 'login',
       component: login
