@@ -13,6 +13,7 @@ import regist from '@/components/regist'
 import questions from '@/views/questions'
 import collection from '@/views/collection'
 import integral from '@/views/integral'
+import detail from '@/views/detail'
 
 Vue.use(Router)
 
@@ -49,6 +50,11 @@ let router = new Router({
       component: integral
     },
     {
+      path: '/views/detail',
+      name: 'detail',
+      component: detail
+    },
+    {
       path: '/views/sort',
       name: 'sort',
       component: sort
@@ -79,11 +85,6 @@ let router = new Router({
       component: vouchers
     },
     {
-      path: '/footer',
-      name: 'footer',
-      component: footer
-    },
-    {
       path: '/login',
       name: 'login',
       component: login
@@ -96,8 +97,8 @@ let router = new Router({
   ],
 })
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') { 
-    next(); 
+  if (to.path === '/login') {
+    next();
   }else {
     let _token = localStorage.getItem('Authorization');
     // let _token = store.state.Authorization;
