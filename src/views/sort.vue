@@ -69,7 +69,7 @@
             <div class="sort_con_bottom"></div>
         </div>
     </div>
-    <bottom></bottom>
+    
   </div>
 </template>
 

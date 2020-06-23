@@ -8,6 +8,8 @@ import eva from '@/views/eva'
 import adress from '@/views/adress'
 import vouchers from '@/views/vouchers'
 import chpassword from '@/views/chpassword'
+import shopcart from '@/views/shopcart'
+import shopcart2 from '@/views/shopcart2'
 import login from '@/components/login'
 import regist from '@/components/regist'
 import questions from '@/views/questions'
@@ -79,9 +81,14 @@ let router = new Router({
       component: vouchers
     },
     {
-      path: '/footer',
-      name: 'footer',
-      component: footer
+      path: '/views/shopcart',
+      name: 'shopcart',
+      component: shopcart
+    },
+    {
+      path: '/views/shopcart2',
+      name: 'shopcart2',
+      component: shopcart2
     },
     {
       path: '/login',
