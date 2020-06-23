@@ -1,38 +1,34 @@
 <template>
   <div class="banner">
     <top></top>
-    <div class="regist">
-      <div class="regist_title">
-        <h1>注册</h1>
+    <div class="pwwd">
+      <div class="pwwd_title">
+        <h1>修改密码</h1>
       </div>
       <div>
         <el-form
-          :model="registerform"
+          :model="ppwdform"
           :rules="rules"
-          ref="registerform"
+          ref="ppwdform"
           label-width="100px"
           class="demo-ruleForm"
         >
-          <el-form-item label="用户名" prop="username">
-            <label slot="label">用&nbsp;&nbsp;户&nbsp;&nbsp;名</label>
-            <el-input v-model="registerform.username" placeholder="请输入用户名"></el-input>
-          </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <label slot="label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</label>
-            <el-input v-model="registerform.password" placeholder="请输入密码"></el-input>
-          </el-form-item>
           <el-form-item label="手机号" prop="telephone">
             <label slot="label">手&nbsp;&nbsp;机&nbsp;&nbsp;号</label>
-            <el-input v-model="registerform.telephone" placeholder="请输入手机号"></el-input>
+            <el-input v-model="ppwdform.telephone" placeholder="请输入手机号"></el-input>
           </el-form-item>
           <el-form-item label="验证码" prop="authCode">
             <label slot="label">验&nbsp;&nbsp;证&nbsp;&nbsp;码</label>
-            <el-input v-model="registerform.authCode" placeholder="请输入验证码" class="yzm"></el-input>
+            <el-input v-model="ppwdform.authCode" placeholder="请输入验证码" class="yzm"></el-input>
             <el-button type="button" @click="submitYzm()">获取验证码</el-button>
           </el-form-item>
+          <el-form-item label="新密码" prop="password">
+            <label slot="label">新&nbsp;&nbsp;密&nbsp;&nbsp;码</label>
+            <el-input v-model="ppwdform.password" placeholder="请输入新密码"></el-input>
+          </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm('registerform')">立即注册</el-button>
-            <router-link to="/login" class="denglu">有账号，去登录？</router-link>
+            <el-button type="primary" @click="submitForm('ppwdform')">立即修改</el-button>
+            <router-link to="/login" class="denglu">不想修改，去登录？</router-link>
           </el-form-item>
         </el-form>
       </div>
@@ -54,8 +50,7 @@ export default {
   },
   data() {
     return {
-      registerform: {
-        username: "",
+      ppwdform: {
         password: "",
         telephone:'',
         authCode:''
@@ -69,10 +64,6 @@ export default {
           { required: true, message: "请输入验证码", trigger: "blur" },
           { min: 3, max: 6, message: "长度在 3 到 6个字符", trigger: "blur" }
         ],
-        username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 3, max: 12, message: "长度在 3 到 12个字符", trigger: "blur" }
-        ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15个字符", trigger: "blur" }
@@ -85,13 +76,12 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           let datalist= new FormData();
-          datalist.append('username',this.registerform.username);
-          datalist.append('password',this.registerform.password);
-          datalist.append('telephone',this.registerform.telephone);
-          datalist.append('authCode',this.registerform.authCode);
-          this.$axios.post('/apo/sso/register',datalist).then(res=>{
+          datalist.append('password',this.ppwdform.password);
+          datalist.append('telephone',this.ppwdform.telephone);
+          datalist.append('authCode',this.ppwdform.authCode);
+          this.$axios.post('/apo/sso/updatePassword',datalist).then(res=>{
             console.log(res);
-            alert('注册成功！');
+            alert('修改成功！');
             this.$router.push('/login');
           })
         } else {
@@ -103,7 +93,7 @@ export default {
     submitYzm(){
       this.$axios.get('/apo/sso/getAuthCode',{
         params:{
-          telephone:this.registerform.telephone
+          telephone:this.ppwdform.telephone
         }
       }).then(res=>{
         console.log(res);
@@ -122,18 +112,18 @@ export default {
   padding-bottom: 50px;
   position: relative;
 }
-.regist {
+.pwwd {
   width: 500px;
   position: absolute;
-  top: 150px;
+  top: 200px;
   right: 100px;
   box-sizing: border-box;
   padding: 20px 30px 0px 0px;
   background: rgba(10, 10, 10, .3);
   h1 {
     text-align: center;
-    letter-spacing: 100px;
-    padding-left: 150px;
+    letter-spacing: 50px;
+    margin-left: 80px;
     color: #fff;
   }
   .demo-ruleForm {

@@ -12,9 +12,11 @@ import shopcart from '@/views/shopcart'
 import shopcart2 from '@/views/shopcart2'
 import login from '@/components/login'
 import regist from '@/components/regist'
+import ppwd from '@/components/ppwd'
 import questions from '@/views/questions'
 import collection from '@/views/collection'
 import integral from '@/views/integral'
+import detail from '@/views/detail'
 
 Vue.use(Router)
 
@@ -51,6 +53,11 @@ let router = new Router({
       component: integral
     },
     {
+      path: '/views/detail',
+      name: 'detail',
+      component: detail
+    },
+    {
       path: '/views/sort',
       name: 'sort',
       component: sort
@@ -81,6 +88,7 @@ let router = new Router({
       component: vouchers
     },
     {
+<<<<<<< HEAD
       path: '/views/shopcart',
       name: 'shopcart',
       component: shopcart
@@ -91,9 +99,16 @@ let router = new Router({
       component: shopcart2
     },
     {
+=======
+>>>>>>> 53a612439eb413ff638012a9962d1a55120af667
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/ppwd',
+      name: 'ppwd',
+      component: ppwd
     },
     {
       path: '/regist',
@@ -103,8 +118,8 @@ let router = new Router({
   ],
 })
 router.beforeEach((to, from, next) => {
-  if (to.path === '/login') { 
-    next(); 
+  if (to.path === '/login') {
+    next();
   }else {
     let _token = localStorage.getItem('Authorization');
     // let _token = store.state.Authorization;

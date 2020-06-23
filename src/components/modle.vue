@@ -1,189 +1,235 @@
 <template>
-  <div class="bgc">
-    <div class="tal">
-      <div class="index">
-        <div class="index-left">
-          <a href="">首页</a>/<span>个人信息</span>
-        </div>
-        <div class="index-right">
-          <span>服务热线：0755-8638050&nbsp;&nbsp;&nbsp;&nbsp;(8:00－24:00)</span>
-          <a href="">QQ在线交谈</a>
+  <div>
+    <top></top>
+    <div class="order">
+      <div class="sort_top">
+        <div class="sort wrap">
+          <el-breadcrumb separator="/">
+            <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+            <el-breadcrumb-item>
+              <!-- <a href="/" v-if="num == 0">个人信息</a> -->
+              <a href="/" v-if="num == 1">我的订单</a>
+              <a href="/" v-else-if="num == 2">评价晒单</a>
+              <a href="/" v-else-if="num == 3">个人信息</a>
+              <a href="/" v-else-if="num == 4">修改密码</a>
+              <a href="/" v-else-if="num == 5">我的地址簿</a>
+              <a href="/" v-else-if="num == 6">我的代金券</a>
+              <a href="/" v-else-if="num == 7">我的积分</a>
+              <a href="/" v-else-if="num == 8">我的收藏</a>
+              <a href="/" v-else-if="num == 9">我的提问</a>
+            </el-breadcrumb-item>
+          </el-breadcrumb>
+          <div class="sort-fw">
+            <span class="fw">服务热线：0755-86380505 (8:00－24:00)</span>
+            <span class="fw-1">QQ在线交谈</span>
+          </div>
         </div>
       </div>
-      <div class="infor">
-        <div class="infor-left">
-          <p>
-            <a href=""></a>
-            <span>US0000615B0</span>
-          </p>
-          <ul>
-            <li><a>我的订单</a></li>
-            <li><a>评价晒单</a></li>
-            <li class="mr-top"><a href="" @click="gos">个人信息</a></li>
-            <li><a>修改密码</a></li>
-            <li><a>我的地址簿</a></li>
-            <li class="mr-top"><a>我的代金券</a></li>
-            <li><a href="" @click="jumps">我的积分</a></li>
-            <li class="mr-top"><a href="" @click="jump">我的收藏</a></li>
-            <li><a href="" @click="go">我的提问</a></li>
-          </ul>
+      <div class="count" id="app">
+        <div class="ct-left">
+          <div class="icon">
+            <i></i>
+            <p>US0000615B1</p>
+          </div>
+          <div>
+            <router-link to="./order">
+              <p class="p-order" @click="get(1)">{{order}}</p>
+            </router-link>
+            <router-link to="./eva">
+              <p class="p-eva" @click="get(2)">{{eva}}</p>
+            </router-link>
+          </div>
+          <div>
+            <router-link to="./people">
+              <p @click="get(3)">{{people}}</p>
+            </router-link>
+            <router-link to="./chpassword">
+              <p @click="get(4)">{{chpassword}}</p>
+            </router-link>
+            <router-link class="p-adress" to="./adress">
+              <p @click="get(5)">{{adress}}</p>
+            </router-link>
+          </div>
+          <div>
+            <router-link class="p-vouchers" to="./vouchers">
+              <p @click="get(6)">{{vouchers}}</p>
+            </router-link>
+            <router-link class="p-integral" to="./integral">
+              <p @click="get(7)">{{integral}}</p>
+            </router-link>
+          </div>
+          <div>
+            <router-link class="p-collection" to="./collection">
+              <p @click="get(8)">{{collection}}</p>
+            </router-link>
+            <router-link class="p-questions" to="./questions">
+              <p @click="get(9)">{{questions}}</p>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
+    <bottom></bottom>
   </div>
 </template>
 
 <script>
-    export default {
-        data(){
-            return {}
-        },
-        methods:{
-            gos(){
-                this.$router.push('./people')
-            },
-            jumps(){
-                this.$router.push('./integral')
-            },
-            jump(){
-                this.$router.push('./collection')
-            },
-            go(){
-                this.$router.push('./questions')
-            }
-        }
+import top from "./header";
+import bottom from "./footer";
+export default {
+  components: {
+    top,
+    bottom
+  },
+  data() {
+    return {
+      num:0,
+      order: "我的订单",
+      eva: "评价晒单",
+      people: "个人信息",
+      chpassword: "修改密码",
+      adress: "我的地址簿",
+      vouchers: "我的代金券",
+      integral: "我的积分",
+      collection: "我的收藏",
+      questions: "我的提问"
+    };
+  },
+  methods:{
+    get(el){
+      this.num = el
     }
+  }
+
+};
 </script>
 
 <style lang="scss">
-  *{
-      margin: 0;
-      padding: 0;
-  }
-  a{
-    text-decoration: none;
-    color: #aaa;
-  }
-  li {
-    list-style: none;
-  }
-  .bgc {
-    background-color: #f5f5f5;
-    .tal {
-      width: 90%;
-      margin: 20px auto;
-      .index {
-        width: 100%;
-        height: 30px;
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-between;
-        .index-left {
-          width: 10%;
-          height: 100%;
-          dispaly: flex;
-          justify-content: space-between;
-          align-items: center;
-          font-size: 12px;
-          a {
-            text-decoration: none;
-            font-size: 12px;
-            line-height: 30px;
-            color: #aaa;
-            margin-right: 5px;
-          }
-          a:hover {
+a {
+  text-decoration: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.order {
+  position: relative;
+  background-color: #f5f5f5;
+  padding: 10px 50px 50px 50px;
+  .sort_top {
+    background: #f5f5f5;
+    padding: 20px;
+    .sort {
+      position: relative;
+      .el-breadcrumb {
+        font-size: 12px;
+        line-height: 22px;
+        .el-breadcrumb__inner a {
+          font-weight: normal;
+          color: #333;
+          &:hover {
             color: #d93732;
           }
-          span {
-            font-size: 12px;
-            line-height: 30px;
-            color: #aaa;
-            margin-left: 5px;
+        }
+        .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+          color: #333;
+        }
+        .el-breadcrumb__inner.is-link {
+          font-weight: normal;
+          &:hover {
+            color: #d93732;
           }
         }
-        .index-right {
-          width: 28%;
-          height: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          span {
-            font-size: 12px;
-            color:#aaa;
-          }
-          a {
-            width: 30%;
-            height: 20px;
-            font-size: 12px;
-            color: #aaa;
-            line-height: 20px;
-            border: 2px solid #aaa;
-            border-radius: 15px;
-            text-align: center;
-          }
-          a:hover {
+      }
+      .sort-fw {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        .fw {
+          font-size: 12px;
+          color: #666;
+        }
+        .fw-1 {
+          margin-left: 10px;
+          font-size: 12px;
+          color: #666;
+          padding: 1px 10px;
+          border-radius: 22px;
+          border: 2px solid #979795;
+          cursor: pointer;
+          &:hover {
             color: #d93732;
             border: 2px solid #d93732;
           }
         }
       }
-      .infor {
-        height: 700px;
-        margin-top: 30px;
-        display: flex;
-        justify-content: space-between;
-        .infor-left {
-          width: 19%;
-          height: 100%;
-          background: #fff;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          p {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            a {
-              width: 50px;
-              height: 50px;
-              border-radius: 50%;
-              background:url('../assets/logo.png') no-repeat -250px -118px;
-            }
-            a:hover {
-              background:url('../assets/logo.png') no-repeat -199px -178px;
-            }
-            span {
-              font-size: 14px;
-              color: #333;
-              margin-top: 10px;
-            }
-          }
-          ul {
-            margin-top: 20px;
-            li{
-              width: 150px;
-              height: 36px;
-              mergin-top: 10px;
-              text-align: center;
-              cursor: pointer;
-              a {
-                font-size: 14px;
-                color:#333;
-                line-height: 36px;
-              }
-              a:hover {
-                color:#d93732;
-              }
-            }
-            .mr-top {
-              margin-top: 15px;
-            }
-          }
+    }
+  }
+  .phone {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0px;
+    .ph-left {
+      font-size: 12px;
+      width: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ph-right {
+      font-size: 12px;
+      .box {
+        border: 1px solid #666666;
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+        border-radius: 50px;
+        line-height: 19px;
+      }
+    }
+  }
+  .count {
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+    margin: 0 auto;
+    height: 600px;
+
+    .ct-left {
+      width: 230px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      div {
+        width: 100px;
+        font-size: 14px;
+        margin: 24px 0px 0px 36px;
+        p {
+          line-height: 30px;
+          color: #333333;
+        }
+        p:hover {
+          color: #d93732;
+        }
+      }
+      .icon {
+        text-align: center;
+        margin-left: 0px;
+        i {
+          display: inline-block;
+          width: 52px;
+          height: 52px;
+          background: url(../assets/logo.png) no-repeat;
+          background-position: -249px -117px;
+        }
+        i:hover {
+          background-position: -198px -176px;
         }
       }
     }
   }
+}
 </style>

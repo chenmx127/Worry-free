@@ -18,6 +18,13 @@ module.exports = {
           '^/api': 'http://cps-hk.com:8080'
         }
       },
+      '/pro': {
+        target: 'https://www.wumeili.top',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/pro': 'https://www.wumeili.top'
+        }
+      },
       '/apo': {
         target: 'http://192.168.1.122:8085',
         changeOrigin: true,
