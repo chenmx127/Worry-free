@@ -51,7 +51,7 @@
              <div class="right">
                 <span>共一件商品</span>
                 <span>合计：￥399</span>
-                <button>去结账</button>
+                <button @click="getjum()">去结账</button>
 
              </div>
              
@@ -89,6 +89,9 @@ export default {
           done();
         })
         .catch(_ => {});
+    },
+    getjum(){
+      this.$router.push('./shopcart')
     }
   }
 };

@@ -212,7 +212,7 @@ export default {
   },
   data() {
     return {
-      name:'',
+      name:'配饰',
       checkList: ["选中且禁用", "复选框 A"],
       goodlist: [],
       isMore: true,

@@ -48,14 +48,14 @@
               <span class="user_span" v-show="!isLogin">/</span>
               <span class="user_name" v-show="isLogin" @click="getPeople()">{{current.username}}</span>
               <router-link to="/regist" class="user_con user_con_list" v-show="!isLogin">注册</router-link>
-              <router-link to="/" class="user_con user_list">我的订单</router-link>
-              <router-link to="/" class="user_con user_list">我的收藏</router-link>
+              <router-link to="../views/order" class="user_con user_list">我的订单</router-link>
+              <router-link to="../views/collection" class="user_con user_list">我的收藏</router-link>
               <span class="user_name" v-show="isLogin" @click="getExit()">退出登录</span>
             </div>
           </div>
         </div>
         <div class="shop">
-          <i class="shop_icon"></i>
+          <i class="shop_icon" @click="getshop()"></i>
           <div class="shop_hid">
             <div class="shop_sort">
               <span class="shop_con">购物车暂无物品，赶快去选购吧！</span>
@@ -116,6 +116,9 @@ export default {
       this.$store.state.isLogin = false;
       localStorage.removeItem("Authorization");
       this.$router.push("/login");
+    },
+    getshop(){
+      this.$router.push("../views/shopcart2")
     },
     getPeople(){
       this.$router.push('../views/people');
