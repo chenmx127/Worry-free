@@ -10,6 +10,7 @@ import vouchers from '@/views/vouchers'
 import chpassword from '@/views/chpassword'
 import login from '@/components/login'
 import regist from '@/components/regist'
+import ppwd from '@/components/ppwd'
 import questions from '@/views/questions'
 import collection from '@/views/collection'
 import integral from '@/views/integral'
@@ -79,14 +80,14 @@ let router = new Router({
       component: vouchers
     },
     {
-      path: '/footer',
-      name: 'footer',
-      component: footer
-    },
-    {
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/ppwd',
+      name: 'ppwd',
+      component: ppwd
     },
     {
       path: '/regist',

@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <top :userlist="namelist"></top>
+    <top></top>
     <div class="login">
       <div class="login_title">
         <h1>登录</h1>
@@ -23,6 +23,7 @@
         <el-form-item>
           <el-button type="primary" @click="submitForm('loginform')">立即登录</el-button>
           <router-link to="/regist" class="zhuce">没有账号，去注册？</router-link>
+          <router-link to="/ppwd" class="ppwd">忘记密码？</router-link>
         </el-form-item>
       </el-form>
       </div>
@@ -44,14 +45,6 @@ export default {
   },
   data() {
     return {
-      namelist:[
-        {title:'男装'},
-        {title:'家居'},
-        {title:'数码'},
-        {title:'文体'},
-        {title:'电器'},
-        {title:'女装'}
-        ],
       loginform: {
         username: "",
         password: ""
@@ -146,6 +139,12 @@ export default {
   .zhuce{
     text-decoration: none;
     color: #fff;
+  }
+  .ppwd{
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 150px;
   }
 }
 </style>

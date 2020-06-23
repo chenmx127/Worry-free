@@ -8,7 +8,8 @@
           <i class="sort_icon"></i>
         </span>
         <ul class="sort_list">
-          <li v-for="(item,index) in userlist" :key="index" @click="jump()">{{item.title}}</li>
+          <li v-for="(item,index) in namelist" :key="index" @click="jump(item.name)">{{item.name}}</li>
+          <li></li>
         </ul>
       </div>
       <div class="head_nav">
@@ -71,6 +72,7 @@ export default {
   data() {
     return {
       input: "",
+      namelist:[],
       navlist: [
         "不限",
         "公主女票",
@@ -103,11 +105,8 @@ export default {
       return this.$store.getters.getCurrentuser;
     }
   },
-  props: {
-    userlist: {
-      type: Array,
-      requried: true
-    }
+  mounted(){
+    this.getGood()
   },
   methods: {
     getLogin() {
@@ -121,8 +120,16 @@ export default {
     getPeople(){
       this.$router.push('../views/people');
     },
-    jump(){
-      this.$router.push('../views/sort')
+    jump(el){
+      this.$emit("name",el).$router.push('../views/sort')
+    },
+    getGood(){
+      this.$axios
+        .get("/pro/w/website/findGoodsTypeList")
+        .then(res => {
+          console.log(res);
+          this.namelist =res.data.data;
+        });
     }
   }
 };

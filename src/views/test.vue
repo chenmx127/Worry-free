@@ -1,6 +1,6 @@
 <template>
   <div>
-    <top :userlist="namelist"></top>
+    <top></top>
     <div class="block">
       <el-carousel height="480px">
         <el-carousel-item v-for="(item,index) in imglist" :key="index">
@@ -46,14 +46,6 @@ export default {
   },
   data() {
     return {
-      namelist: [
-        { title: "男装" },
-        { title: "家居" },
-        { title: "数码" },
-        { title: "文体" },
-        { title: "电器" },
-        { title: "女装" }
-      ],
       imglist: [
         "../../static/ban-1.jpg",
         "../../static/ban-2.jpg",

@@ -83,11 +83,11 @@
     position: relative;
 
     .infor-right {
-      width: 71%;
-      height: 93%;
+      width: 950px;
+      height: 600px;
       background: #fff;
       position: absolute;
-      top: 60px;
+      top: 162px;
       right: 60px;
       display: flex;
       flex-direction: column;

@@ -1,6 +1,6 @@
 <template>
  <div>
-   <peo></peo>
+   <modle></modle>
     <div class="content-right">
               <div class="title">评价晒单</div>
               <div class="content">
@@ -10,10 +10,10 @@
  </div>
 </template>
 <script>
-import peo from "../components/peo"
+import modle from "../components/modle"
 export default {
     components:{
-        peo:peo,
+        modle: modle
     }
 }
 </script>
@@ -25,9 +25,8 @@ export default {
              padding: 30px 30px;
              box-sizing: border-box;
              position:absolute;
-             top:70px;
-             left:340px;
-             bottom:0;
+             top:162px;
+             right:60px;
             .title{
                width:95%;
                margin:30px auto;
@@ -40,7 +39,6 @@ export default {
                     margin-top:80px;
                     text-align: center;
                     color: #333333;
-                    background-color:#FBF8CC;
                     line-height:40px;
                 }
             }

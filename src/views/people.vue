@@ -85,11 +85,11 @@
   .modle{
       position: relative;
         .infor-right {
-          width: 71%;
-          height: 93%;
+          width: 950px;
+          height: 600px;
           background: #fff;
           position: absolute;
-          top: 60px;
+          top: 162px;
           right:60px;
           display: flex;
           flex-direction:  column;
@@ -108,8 +108,6 @@
             height: 110px;
             border-bottom: 1px solid #eee;
             margin: 0px 56px;
-            dispay: flex;
-            flex-direction: column;
             font-size: 14px;
             .in-top {
               width: 100%;
@@ -155,7 +153,6 @@
               .btn {
                 width: 850px;
                 border-top: 1px solid #eee;
-                margin-top: 50px;
                 .el-button {
                   float: right;
                   width:  230px;
